@@ -4,9 +4,9 @@ import {
   BadRequestException,
   HttpException,
   HttpStatus,
-  Inject
+  Inject,
 } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { validate as validateUUID } from 'uuid';
 import { validate as validateEntity } from 'class-validator';
 
@@ -17,12 +17,10 @@ import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class UsersService {
-
   constructor(
     @Inject('USER_REPOSITORY')
-    private userRepository: Repository<User>
-  ) {
-  }
+    private userRepository: Repository<User>,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
@@ -57,7 +55,6 @@ export class UsersService {
   }
 
   async update(id: string, updatePasswordDto: UpdatePasswordDto) {
-    console.log('user id is ', id)
     if (!validateUUID(id)) {
       throw new BadRequestException();
     }
@@ -70,10 +67,10 @@ export class UsersService {
       if (errors.length) {
         throw new BadRequestException();
       }
-    })
+    });
 
     const user = await this.findOne(id);
-    console.log('11111111111', user)
+    console.log('11111111111', user);
 
     if (!user) {
       throw new NotFoundException();

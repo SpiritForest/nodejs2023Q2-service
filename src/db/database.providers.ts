@@ -8,9 +8,7 @@ export const databaseProviders = [
         type: 'sqlite',
         database: ':memory:',
         dropSchema: true,
-        entities: [
-            __dirname + '/../**/*.entity{.ts,.js}',
-        ],
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
         logging: false,
       });
