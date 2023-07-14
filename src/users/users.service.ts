@@ -4,23 +4,24 @@ import {
   BadRequestException,
   HttpException,
   HttpStatus,
+  Inject
 } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { validate as validateUUID } from 'uuid';
 import { validate as validateEntity } from 'class-validator';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-user.dto';
-import { AppDataSource } from '../db';
 import { User } from './entities/user.entity';
 import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class UsersService {
-  userRepository: Repository<User>;
 
-  constructor() {
-    this.userRepository = AppDataSource.getRepository(User);
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private userRepository: Repository<User>
+  ) {
   }
 
   async create(createUserDto: CreateUserDto) {
