@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   VersionColumn,
 } from 'typeorm';
-import { Exclude, Transform, Type } from 'class-transformer';
+import { Exclude, Transform } from 'class-transformer';
 import { IsString } from 'class-validator';
 
 @Entity()

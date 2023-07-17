@@ -19,9 +19,9 @@ export class Track {
   @Column()
   duration: number;
 
-  @ManyToOne(() => Artist, artist => artist.tracks, { onDelete: 'SET NULL' })
+  @ManyToOne(() => Artist, (artist) => artist.tracks, { onDelete: 'SET NULL' })
   artist: Artist;
 
-  @ManyToOne(() => Album, album => album.tracks, { onDelete: 'SET NULL'})
+  @ManyToOne(() => Album, (album) => album.tracks, { onDelete: 'SET NULL' })
   album: Album;
 }
