@@ -1,4 +1,9 @@
-import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { Repository } from 'typeorm';
@@ -10,7 +15,7 @@ import { validate as validateEntity } from 'class-validator';
 export class AlbumService {
   constructor(
     @Inject('ALBUM_REPOSITORY')
-    private albumRepository: Repository<Album>
+    private albumRepository: Repository<Album>,
   ) {}
 
   create(createAlbumDto: CreateAlbumDto) {
@@ -26,7 +31,7 @@ export class AlbumService {
       const album = this.albumRepository.create(createAlbumDto);
 
       return this.albumRepository.save(album);
-    })
+    });
   }
 
   findAll() {
@@ -82,7 +87,7 @@ export class AlbumService {
 
     if (!album) {
       throw new NotFoundException();
-    }    
+    }
 
     return this.albumRepository.remove(album);
   }
