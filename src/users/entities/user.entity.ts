@@ -26,11 +26,11 @@ export class User {
   @VersionColumn()
   version: number;
 
-  @CreateDateColumn({ type: 'bigint', name: 'created_at' })
+  @CreateDateColumn({ default: () => 'now()', name: 'created_at' })
   @Transform(({ value }) => new Date(value).getTime())
   createdAt: number;
 
-  @UpdateDateColumn({ type: 'bigint', name: 'updated_at' })
+  @UpdateDateColumn({ default: () => 'now()', name: 'updated_at' })
   @Transform(({ value }) => new Date(value).getTime())
   updatedAt: number;
 }
