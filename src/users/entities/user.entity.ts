@@ -28,9 +28,9 @@ export class User {
 
   @CreateDateColumn({ default: () => 'now()', name: 'created_at' })
   @Transform(({ value }) => new Date(value).getTime())
-  createdAt: number;
+  createdAt: Date;
 
   @UpdateDateColumn({ default: () => 'now()', name: 'updated_at' })
   @Transform(({ value }) => new Date(value).getTime())
-  updatedAt: number;
+  updatedAt: Date;
 }

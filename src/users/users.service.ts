@@ -70,7 +70,6 @@ export class UsersService {
     });
 
     const user = await this.findOne(id);
-    console.log('11111111111', user);
 
     if (!user) {
       throw new NotFoundException();
@@ -85,7 +84,7 @@ export class UsersService {
 
     user.version += 1;
     user.password = updatePasswordDto.newPassword;
-    user.updatedAt = Date.now();
+    user.updatedAt = new Date();
 
     const updatedUser = await this.userRepository.save(user);
     return instanceToPlain(updatedUser);
