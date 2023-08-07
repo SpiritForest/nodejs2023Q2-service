@@ -12,19 +12,29 @@ services:
     ports:
       - $POSTGRES_PORT:$POSTGRES_PORT
     networks:
-      - lib-db      
+      - lib-db
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data      
   
   rest-service:
     container_name: rest-service
     image: spiritforest/home-library:1.0
     restart: always
+    build: ./
     environment:
       - PORT=$PORT
     ports:
       - $PORT:$PORT
     networks:
       - lib-db
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - db
 
 networks:
   lib-db:
     driver: 'bridge'
+
+volumes:
+  postgresql-data:
