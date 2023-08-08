@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import config from '../config';
+import { FileLogger } from '../utils/FileLogger';
 
 export const databaseProviders = [
   {
@@ -7,32 +8,18 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'postgres',
-        host: 'localhost',
+        host: 'postgres',
         port: config.POSTGRES_PORT,
         username: config.POSTGRES_USER,
         password: config.POSTGRES_PASSWORD,
-        dropSchema: true,
+        dropSchema: false,
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        synchronize: true,
-        logging: false,
+        synchronize: false,
+        logging: true,
+        logger: new FileLogger(true, "/logs")
       });
 
       return dataSource.initialize();
     },
-    // useFactory: async () => {
-    //   const dataSource = new DataSource({
-    //     type: 'postgres',
-    //     host: 'postgres',
-    //     port: config.POSTGRES_PORT,
-    //     username: config.POSTGRES_USER,
-    //     password: config.POSTGRES_PASSWORD,
-    //     dropSchema: true,
-    //     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    //     synchronize: true,
-    //     logging: false,
-    //   });
-
-    //   return dataSource.initialize();
-    // },
   },
 ];

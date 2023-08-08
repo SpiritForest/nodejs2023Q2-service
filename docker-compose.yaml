@@ -29,6 +29,7 @@ services:
       - lib-db
     volumes:
       - ./src:/app/src
+      - rest-service-log:/app/logs
     depends_on:
       - db
 
@@ -38,3 +39,4 @@ networks:
 
 volumes:
   postgresql-data:
+  rest-service-log:

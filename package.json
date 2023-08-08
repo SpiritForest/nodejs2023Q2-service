@@ -8,7 +8,6 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "docker:build": "docker build -t spiritforest/home-library:1.0 ./",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
