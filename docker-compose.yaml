@@ -14,13 +14,15 @@ services:
     networks:
       - lib-db
     volumes:
-      - postgresql-data:/var/lib/postgresql/data      
-  
+      - postgresql-data:/var/lib/postgresql/data
+
   rest-service:
     container_name: rest-service
     image: spiritforest/home-library:1.0
     restart: always
-    build: ./
+    build:
+      dockerfile: Dockerfile
+      context: .
     environment:
       - PORT=$PORT
     ports:
@@ -28,7 +30,7 @@ services:
     networks:
       - lib-db
     volumes:
-      - ./src:/app/src
+      - ./:/app/
       - rest-service-log:/app/logs
     depends_on:
       - db
