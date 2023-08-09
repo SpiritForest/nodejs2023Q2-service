@@ -152,7 +152,7 @@ describe('Users (e2e)', () => {
         .send(createUserDto);
 
       const { id: createdId } = creationResponse.body;
-      
+
       expect(creationResponse.status).toBe(StatusCodes.CREATED);
 
       const updateResponse = await unauthorizedRequest

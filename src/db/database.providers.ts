@@ -16,7 +16,7 @@ export const databaseProviders = [
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: false,
         logging: true,
-        logger: new FileLogger(true, "/logs")
+        logger: new FileLogger(true, '/logs'),
       });
 
       return dataSource.initialize();
