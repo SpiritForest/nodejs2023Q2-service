@@ -9,8 +9,8 @@ import {
 import { Favorite } from './entities/fav.entity';
 import { DataSource, Repository } from 'typeorm';
 import { Track } from '../tracks/entities/track.entity';
-import { Album } from 'src/album/entities/album.entity';
-import { Artist } from 'src/artist/entities/artist.entity';
+import { Album } from '../album/entities/album.entity';
+import { Artist } from '../artist/entities/artist.entity';
 import { validate as validateUUID } from 'uuid';
 
 @Injectable()

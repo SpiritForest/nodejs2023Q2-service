@@ -18,7 +18,11 @@
     "test:auth": "cross-env TEST_MODE=auth jest --config ./test/jest-e2e.json --noStackTrace --runInBand",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "typeorm:run-migrations": "npx typeorm-ts-node-commonjs migration:run -d ./src/config/typeOrm.config.ts",
+    "typeorm:generate-migration": "npx typeorm-ts-node-commonjs migration:generate ./src/migrations/home-library -d ./src/config/typeOrm.config.ts",
+    "typeorm:create-migration": "typeorm migration:create ./src/migrations/home-library",
+    "typeorm:revert-migration": "npx typeorm-ts-node-commonjs migration:revert -d ./src/config/typeOrm.config.ts" 
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
