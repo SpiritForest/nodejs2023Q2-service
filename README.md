@@ -4,23 +4,33 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Docker - [Download & Install Docker](https://www.docker.com/)
 
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone https://github.com/SpiritForest/nodejs2023Q2-service.git
 ```
 
-## Installing NPM modules
+## Settin up
+In the root project folder create .env file, you can use fot it a template that already exists in the root folder, it's name is  '.env.example'
 
+## Running application inside docker containers
+
+```
+docker-compose up
+```
+
+## Running application locally (optional)
+
+Open the file 'src\config\typeOrm.config.ts' and change host name from 'postgres' to 'localchost' so the new version will look like **host: 'localhost'**
+If the postgres container does not exist run it using the following command:
 ```
 npm install
 ```
 
-## Running application
-
 ```
-npm start
+docker run -d -p 5432:5432 postgres:15.3 --name postgres -v postgresql-data:/var/lib/postgresql/data
 ```
 
 After starting the app on port (4000 as default) you can open

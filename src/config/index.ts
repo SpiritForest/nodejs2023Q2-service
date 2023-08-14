@@ -10,4 +10,5 @@ export default {
   POSTGRES_USER: process.env.POSTGRES_USER,
   POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
   POSTGRES_PORT: +process.env.POSTGRES_PORT,
+  POSTGRES_HOST: process.env.POSTGRES_HOST || 'postgres',
 };
