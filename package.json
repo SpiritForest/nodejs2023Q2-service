@@ -19,6 +19,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "docker:scan": "docker scout cves spiritforest/home-library:1.0",
     "typeorm:run-migrations": "cross-env POSTGRES_HOST=localhost npx typeorm-ts-node-commonjs migration:run -d ./src/config/typeOrm.config.ts",
     "typeorm:generate-migration": "cross-env POSTGRES_HOST=localhost npx typeorm-ts-node-commonjs migration:generate ./src/migrations/home-library -d ./src/config/typeOrm.config.ts",
     "typeorm:create-migration": "typeorm migration:create ./src/migrations/home-library",
