@@ -12,8 +12,9 @@
 git clone https://github.com/SpiritForest/nodejs2023Q2-service.git
 ```
 
-## Settin up
+## Setting up
 In the root project folder create .env file, you can use fot it a template that already exists in the root folder, it's name is  '.env.example'
+
 
 ## Running application inside docker containers
 
@@ -21,13 +22,19 @@ In the root project folder create .env file, you can use fot it a template that 
 docker-compose up
 ```
 
-## Running application locally (optional)
+## Run migrations
+Open a separate terminal in your IDE and run
+```
+npm run typeorm:run-migrations
+```
 
-Open the file 'src\config\typeOrm.config.ts' and change host name from 'postgres' to 'localchost' so the new version will look like **host: 'localhost'**
-If the postgres container does not exist run it using the following command:
+## Running application locally (optional)
+Instal packages:
 ```
 npm install
 ```
+Add to the .env file the following line POSTGRES_HOST=localhost
+If the postgres container does not exist run it using the following command:
 
 ```
 docker run -d -p 5432:5432 postgres:15.3 --name postgres -v postgresql-data:/var/lib/postgresql/data
