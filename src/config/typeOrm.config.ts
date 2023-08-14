@@ -2,9 +2,9 @@ import config from '.';
 import { FileLogger } from '../utils/FileLogger';
 import { DataSource } from 'typeorm';
 
-const dataSource = new DataSource({
+export const dataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
+  host: 'postgres',
   port: config.POSTGRES_PORT,
   username: config.POSTGRES_USER,
   password: config.POSTGRES_PASSWORD,
@@ -12,7 +12,5 @@ const dataSource = new DataSource({
   logging: true,
   logger: new FileLogger(true, '/logs'),
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  migrations: ['src/migrations/*.ts'],
+  migrations: [__dirname + '/../migrations/*.ts'],
 });
-
-export default dataSource;
