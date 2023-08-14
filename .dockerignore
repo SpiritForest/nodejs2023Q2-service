@@ -1,0 +1,16 @@
+# Ignore editor temporary files
+*~
+*.swp
+*.swo
+
+# Ignore version control files
+.git
+.gitignore
+.svn
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+node_modules
+dist
