@@ -36,8 +36,10 @@ export class UsersService {
     });
   }
 
-  findAll() {
-    return this.userRepository.find();
+  async findAll() {
+    return (await this.userRepository.find()).map((user) => {
+      return instanceToPlain(user);
+    });
   }
 
   async findOne(id: string) {

@@ -7,6 +7,7 @@ import { UsersModule } from '../users/users.module';
 import { UsersService } from '../users/users.service';
 import { userProviders } from '../users/user.providers';
 import { DatabaseModule } from '../db/database.module';
+import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [
@@ -17,6 +18,14 @@ import { DatabaseModule } from '../db/database.module';
     } as JwtModuleOptions),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UsersService, ...userProviders],
+  providers: [
+    AuthService,
+    UsersService,
+    ...userProviders,
+    {
+      provide: 'APP_GUARD',
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AuthModule {}
