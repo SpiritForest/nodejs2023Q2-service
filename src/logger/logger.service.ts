@@ -1,5 +1,6 @@
 import { ConsoleLogger } from '@nestjs/common';
-import { mkdirSync, writeFileSync } from 'fs';
+import { mkdirSync } from 'fs';
+import { writeFile } from 'fs/promises';
 import * as path from 'path';
 // import { Injectable, Scope } from '@nestjs/common';
 
@@ -7,9 +8,10 @@ import * as path from 'path';
 export class CustomLogger extends ConsoleLogger {
   basePath: string;
 
+  
   constructor(filePath: string) {
     super();
-    this.basePath = path.join(__dirname, filePath);
+    this.basePath = path.join(__dirname + '../../', filePath);
   }
 
   log(...args: [any, string?, string?]) {
@@ -45,7 +47,7 @@ export class CustomLogger extends ConsoleLogger {
       recursive: true,
     });
 
-    writeFileSync(path.join(this.basePath, 'logs.log'), message + '\r\n', {
+    writeFile(path.join(this.basePath, 'logs.log'), message + '\r\n', {
       encoding: 'utf-8',
       flag: 'a',
     });

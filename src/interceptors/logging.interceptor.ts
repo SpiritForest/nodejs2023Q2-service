@@ -10,7 +10,7 @@ import { CustomLogger } from '../logger/logger.service';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  private readonly logger = new CustomLogger('../logs');
+  private readonly logger = new CustomLogger('./logs');
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
@@ -26,15 +26,14 @@ export class LoggingInterceptor implements NestInterceptor {
       tap(() => {
         const logMessage = `
           Request:
-            - Time: ${new Date()}
+            - Timestamp: ${new Date().toISOString()}
             - Method: ${method}
             - URL: ${url}
             - Query: ${JSON.stringify(query)}
             - Body: ${JSON.stringify(body)}
           Response:
             - Status: ${statusCode}
-          Execution Time, ms: ${new Date().getTime() - startDate.getTime()}
-        `;
+          Execution Time, ms: ${new Date().getTime() - startDate.getTime()}`;
         this.logger.log(logMessage);
       }),
     );
