@@ -2,41 +2,64 @@ import { ConsoleLogger } from '@nestjs/common';
 import { mkdirSync } from 'fs';
 import { writeFile } from 'fs/promises';
 import * as path from 'path';
-// import { Injectable, Scope } from '@nestjs/common';
+import config from '../config';
 
-// @Injectable({ scope: Scope.TRANSIENT })
 export class CustomLogger extends ConsoleLogger {
   basePath: string;
-
   
   constructor(filePath: string) {
     super();
     this.basePath = path.join(__dirname + '../../', filePath);
   }
 
-  log(...args: [any, string?, string?]) {
-    // log(message: any, stack?: string, context?: string) {
-    super.log(...args);
-    this.write(...args);
-  }
-
-  warn(...args: [any, string?, string?]) {
-    super.warn(...args);
-    this.write(...args);
-  }
-
   debug(...args: [any, string?, string?]) {
+    const logLevel = 4;
+
     super.debug(...args);
+
+    if (logLevel > config.LOG_LEVEL) { return; }
+
     this.write(...args);
   }
 
   verbose(...args: [any, string?, string?]) {
+    const logLevel = 3;
+    
     super.verbose(...args);
+
+    if (logLevel > config.LOG_LEVEL) { return; }
+
+    this.write(...args);
+  }
+
+  log(...args: [any, string?, string?]) {
+    const logLevel = 2;
+
+    super.log(...args);
+
+    console.log(config.LOG_LEVEL)
+    if (logLevel > config.LOG_LEVEL) { return; }
+
+    this.write(...args);
+  }
+
+  warn(...args: [any, string?, string?]) {
+    const logLevel = 1;
+    
+    super.warn(...args);
+
+    if (logLevel > config.LOG_LEVEL) { return; }
+
     this.write(...args);
   }
 
   error(...args: [any, string?, string?]) {
+    const logLevel = 0;
+    
     super.error(...args);
+
+    if (logLevel > config.LOG_LEVEL) { return; }
+
     this.write(...args);
     this.writeErrors(...args);
   }
@@ -53,6 +76,7 @@ export class CustomLogger extends ConsoleLogger {
       flag: 'a',
     });
   }
+
 
   protected writeErrors(...args: [any, string?, string?]) {
     const [message, stack, context] = args;

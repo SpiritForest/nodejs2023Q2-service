@@ -41,7 +41,7 @@ import {
             - Status: ${httpStatus}
             - Message: ${exception instanceof Error ? exception.message : exception}`;
 
-      this.logger.log(logMessage);
+      this.logger.error(logMessage);
 
       httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
     }

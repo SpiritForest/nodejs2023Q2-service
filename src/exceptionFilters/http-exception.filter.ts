@@ -25,7 +25,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
             Response:
             - Status: ${statusCode}`;
 
-    this.logger.log(logMessage);
+    this.logger.warn(logMessage);
 
     response
       .status(statusCode)
