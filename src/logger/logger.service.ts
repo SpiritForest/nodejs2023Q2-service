@@ -38,6 +38,7 @@ export class CustomLogger extends ConsoleLogger {
   error(...args: [any, string?, string?]) {
     super.error(...args);
     this.write(...args);
+    this.writeErrors(...args);
   }
 
   protected write(...args: [any, string?, string?]) {
@@ -48,6 +49,19 @@ export class CustomLogger extends ConsoleLogger {
     });
 
     writeFile(path.join(this.basePath, 'logs.log'), message + '\r\n', {
+      encoding: 'utf-8',
+      flag: 'a',
+    });
+  }
+
+  protected writeErrors(...args: [any, string?, string?]) {
+    const [message, stack, context] = args;
+
+    mkdirSync(this.basePath, {
+      recursive: true,
+    });
+
+    writeFile(path.join(this.basePath, 'logsErrors.log'), message + '\r\n', {
       encoding: 'utf-8',
       flag: 'a',
     });

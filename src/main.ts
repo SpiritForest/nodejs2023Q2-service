@@ -24,8 +24,7 @@ async function bootstrap() {
 
   process.on('uncaughtException', (error) => {
     logger.error(`
-    UUncaught Exception: ${JSON.stringify(error)}', 
-    reason: ${reason}`);'
+    UUncaught Exception: ${JSON.stringify(error)}`);
   });
 
   app.useLogger(logger);
